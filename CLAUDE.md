@@ -9,7 +9,7 @@ Free energy minimization modeling for the LegionIO cognitive architecture. Imple
 ## Gem Info
 
 - **Gem name**: `lex-free-energy`
-- **Version**: `0.1.0`
+- **Version**: `0.1.1`
 - **Namespace**: `Legion::Extensions::FreeEnergy`
 - **Location**: `extensions-agentic/lex-free-energy/`
 
@@ -88,3 +88,4 @@ Central store: `@models` (hash by domain), `@errors` (array, rolling). Key metho
 - Active inference action selection: EFE is computed for a small set of candidate actions (defined per domain), returns the minimizing action
 - Model complexity penalty is additive per update — complex models accumulate cost even when accurate
 - Precision is updated separately via `precision_update`, not automatically from prediction errors
+- `INFERENCE_MODES` is validated in both `FreeEnergyEngine#minimize` and the `minimize_free_energy` runner — invalid modes return nil / `{ success: false, reason: :invalid_mode }`

@@ -65,6 +65,13 @@ RSpec.describe Legion::Extensions::FreeEnergy::Runners::FreeEnergy do
       result = runner_host.minimize_free_energy(belief_id: :nonexistent)
       expect(result[:success]).to be false
     end
+
+    it 'rejects invalid inference mode' do
+      result = runner_host.minimize_free_energy(belief_id: belief_id, mode: :bogus)
+      expect(result[:success]).to be false
+      expect(result[:reason]).to eq(:invalid_mode)
+      expect(result[:valid_modes]).to eq(Legion::Extensions::FreeEnergy::Helpers::Constants::INFERENCE_MODES)
+    end
   end
 
   describe '#compute_free_energy' do

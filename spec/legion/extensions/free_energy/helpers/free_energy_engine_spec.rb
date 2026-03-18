@@ -107,6 +107,16 @@ RSpec.describe Legion::Extensions::FreeEnergy::Helpers::FreeEnergyEngine do
       result = engine.minimize(belief_id: belief.id, mode: :active)
       expect(result[:type]).to eq(:active_inference)
     end
+
+    it 'returns nil for invalid mode' do
+      expect(engine.minimize(belief_id: belief.id, mode: :bogus)).to be_nil
+    end
+
+    it 'accepts all valid INFERENCE_MODES' do
+      constants::INFERENCE_MODES.each do |mode|
+        expect { engine.minimize(belief_id: belief.id, mode: mode) }.not_to raise_error
+      end
+    end
   end
 
   describe '#total_free_energy' do

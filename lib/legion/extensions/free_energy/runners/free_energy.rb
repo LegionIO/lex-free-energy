@@ -30,6 +30,10 @@ module Legion
           end
 
           def minimize_free_energy(belief_id:, mode: :perceptual, **)
+            unless Helpers::Constants::INFERENCE_MODES.include?(mode)
+              return { success: false, reason: :invalid_mode, valid_modes: Helpers::Constants::INFERENCE_MODES }
+            end
+
             result = engine.minimize(belief_id: belief_id, mode: mode)
             return { success: false, reason: :not_found } unless result
 

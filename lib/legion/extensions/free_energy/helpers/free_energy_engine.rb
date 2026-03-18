@@ -65,6 +65,8 @@ module Legion
           end
 
           def minimize(belief_id:, mode: :perceptual)
+            return nil unless INFERENCE_MODES.include?(mode)
+
             case mode
             when :perceptual then minimize_perceptual(belief_id: belief_id)
             when :active     then minimize_active(belief_id: belief_id)
